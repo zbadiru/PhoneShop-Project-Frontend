@@ -9,6 +9,7 @@ class Details extends Component {
             <ProductConsumer>
                 {value => {
                 const {id, img, price, name, inCart} = value.detailsProduct
+                const {popupOpen, closePopup} = value;
                 return (
                     <div className="container py-5"> { /* name */ } 
                     <div className="row">
@@ -41,7 +42,7 @@ class Details extends Component {
                                     disabled={inCart ? true : false}
                                     onClick={() => {
                                         value.addToCart(id);
-                                        value.openPopUp(id)
+                                        value.openPopup(id);
                                 }}>
                                     {inCart ? 'inCart' : 'add to cart'}
                                 </ButtonContainer>
