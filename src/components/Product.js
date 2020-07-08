@@ -6,8 +6,6 @@ import PropTypes from 'prop-types'
 
 class Product extends Component {
 
- 
-    
     render() {
         const {id, name, img, price, inCart} = this.props.product
         return ( 
@@ -25,7 +23,8 @@ class Product extends Component {
                         <button className="cart-btn" 
                             disabled={inCart ? true : false} 
                             onClick={() => {
-                                value.addToCart(id)
+                                value.addToCart(id);
+                                value.openPopup(id)
                             }}
                         >
                                 {inCart ? (
