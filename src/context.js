@@ -8,6 +8,7 @@ const ProductContext = React.createContext()
 
 class ProductProvider extends Component { 
     state = {
+        user: null,
         products: [],
         detailsProduct: [],
         cart: [],
@@ -148,7 +149,26 @@ class ProductProvider extends Component {
             this.addTotals()
         });
     }
+        handleUserChange = (event) => {
+        event.preventDefault();
+        
+        const { username, password } = this.state;
+        const userData = { username, password };
+        
+        debugger
+        let user = fetch(`http://localhost:3001/users`)
+        .then((res) => res.json())
+        .then((users => users.filter(user => user.username === username)))
+        
+        let tempState = Object.assign({}, this.state.user)
+        let object = user
+        tempState.user = object
+        this.setState({ user: tempState }, 
+        () => console.log(this.state.user))
+        
+    }
     render() {
+        
         return (
             <ProductContext.Provider value={{
                 ...this.state,
@@ -159,7 +179,8 @@ class ProductProvider extends Component {
                 increment: this.increment,
                 decrement: this.decrement,
                 removeItem: this.removeItem,
-                clearCart: this.clearCart
+                clearCart: this.clearCart,
+                handleUserChange: this.handleUserChange
             }}>
                 {this.props.children}
             </ProductContext.Provider>
@@ -170,3 +191,4 @@ class ProductProvider extends Component {
 const ProductConsumer = ProductContext.Consumer
 
 export {ProductProvider, ProductConsumer}
+// export {handleUserChange}
