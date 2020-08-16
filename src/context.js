@@ -76,7 +76,7 @@ class ProductProvider extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/phones")
+        fetch("http://localhost:3010/phones")
         .then((data) => data.json())
         .then((products) => this.setState({
             products: products,
